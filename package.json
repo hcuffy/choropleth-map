@@ -5,5 +5,11 @@
   "main": "server.js",
   "repository": "https://github.com/hcuffy/choropleth-map.git",
   "author": "Henry Cuffy",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "eslint": "^5.4.0"
+  }
 }
