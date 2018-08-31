@@ -1,3 +1,8 @@
 body {
   background-color: #216c89;
 }
+
+.states {
+  stroke: #ffffff;
+  fill: none;
+}
