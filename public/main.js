@@ -42,12 +42,12 @@ function createMap(err, mapData, degreeData) {
 		throw err
 	}
 	svg.append('g')
-		.attr('class', 'county')
 		.selectAll('path')
 		.data(topojson.feature(mapData, mapData.objects.counties).features)
 		.enter()
 		.append('path')
 		.attr('d', path)
+		.attr('class', 'county')
 		.attr('fill', (d) => {
 			let educationObject = degreeData.filter((degreeObj) => {
 				let singleDegreeObj = degreeObj.fips == d.id
@@ -87,6 +87,15 @@ function createMap(err, mapData, degreeData) {
 				})
 				.style('left', (d3.event.pageX + 10) + 'px')
 				.style('top', (d3.event.pageY + 10) + 'px')
+				.attr('data-education', () => {
+					let educationObject = degreeData.filter((degreeObj) => {
+						let singleDegreeObj = degreeObj.fips == d.id
+
+						return singleDegreeObj
+					})
+
+					return educationObject[0].bachelorsOrHigher
+				})
 		})
 
 	svg.on('mouseout', () => {
@@ -101,7 +110,7 @@ function createMap(err, mapData, degreeData) {
 		.attr('d', path)
 
 	svg.append('text')
-		.attr('id', 'title')
+		.attr('id', 'description')
 		.attr('x', 20)
 		.attr('y', -20)
 		.text('U.S. Bacholor degree(or higher) attainment by county.')
