@@ -131,6 +131,7 @@ legend
 
 legend
 	.append('text')
+	.attr('class', 'legend-text')
 	.attr('x', width - 50)
 	.attr('y', 30)
 	.text((d , i) => {
