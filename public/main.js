@@ -69,10 +69,33 @@ function createMap(err, mapData, degreeData) {
 
 			return educationObject[0].bachelorsOrHigher
 		})
+		.on('mouseover', (d) => {
+			tooltip
+				.transition()
+				.style('opacity', 1)
+				.style('visibility', 'visible')
+			tooltip
+				.html( () => {
+					let educationObject = degreeData.filter((degreeObj) => {
+						let singleDegreeObj = degreeObj.fips == d.id
 
+						return singleDegreeObj
+					})
+					let toolTipText = educationObject[0].area_name +', '+ educationObject[0].state +'</br>'+  educationObject[0].bachelorsOrHigher +'% with Bachelor or greater.'
+
+					return toolTipText
+				})
+				.style('left', (d3.event.pageX + 10) + 'px')
+				.style('top', (d3.event.pageY + 10) + 'px')
+		})
+
+	svg.on('mouseout', () => {
+		tooltip.transition().style('visibility', 'hidden')
+	})
 
 	svg.append('path')
 		.datum(topojson.mesh(mapData, mapData.objects.states, (a, b) => {
+
 			 return a != b }))
 		.attr('class', 'states')
 		.attr('d', path)
@@ -81,9 +104,40 @@ function createMap(err, mapData, degreeData) {
 		.attr('id', 'title')
 		.attr('x', 20)
 		.attr('y', -20)
-		.text('U.S. Bacholor degree(or higher)  attainment by county.')
+		.text('U.S. Bacholor degree(or higher) attainment by county.')
 
 }
+
+let legend =	svg
+	.selectAll('.legend')
+	.data(colorRange)
+	.enter()
+	.append('g')
+	    .attr('id', 'legend')
+	    .attr('transform', (d , i) => {
+
+	      return 'translate('+(-700 + i * 50)+',' + (0)+ ')'
+	    })
+
+legend
+	.append('rect')
+	.attr('x', width - 50)
+	.attr('width', 50)
+	.attr('height', 15)
+	.style('fill',  color => {
+
+		 return color
+	})
+
+legend
+	.append('text')
+	.attr('x', width - 50)
+	.attr('y', 30)
+	.text((d , i) => {
+		let legendText =  colorDomain[i]
+
+		return legendText + '%'
+	})
 
 d3.queue()
 	.defer(d3.json, 'https://raw.githubusercontent.com/no-stack-dub-sack/testable-projects-fcc/master/src/data/choropleth_map/counties.json')
