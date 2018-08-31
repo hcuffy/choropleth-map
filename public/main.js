@@ -1,7 +1,7 @@
 
 const width = 1000
 const height = 900
-const padding = 50
+const padding = 100
 let path = d3.geoPath()
 let degree = d3.map()
 
@@ -27,16 +27,20 @@ let svg = d3.select('.chart')
 	.append('svg')
 	.attr('width', width)
 	.attr('height', height)
-	.style('padding', padding)
+	.style('padding', '60 20 140 200')
+
+var tooltip = d3
+	.select('.chart')
+	.append('div')
+	.attr('id', 'tooltip')
 
 
-function createMap(error, mapData, degreeData) {
-	if (error) {
-		throw error
+
+
+function createMap(err, mapData, degreeData) {
+	if (err) {
+		throw err
 	}
-
-	let colorTest = colorScale.invertExtent('#ccffcc')
-
 	svg.append('g')
 		.attr('class', 'county')
 		.selectAll('path')
@@ -44,13 +48,25 @@ function createMap(error, mapData, degreeData) {
 		.enter()
 		.append('path')
 		.attr('d', path)
-		.attr('fill', 'navy')
+		.attr('fill', (d) => {
+			for (let i = 0; i < degreeData.length; i++){
+				if (d.id == degreeData[i].fips)
+					return colorScale(degreeData[i].bachelorsOrHigher)
+			}
+		})
 
 	svg.append('path')
 		.datum(topojson.mesh(mapData, mapData.objects.states, (a, b) => {
 			 return a != b }))
 		.attr('class', 'states')
 		.attr('d', path)
+
+	svg.append('text')
+		.attr('id', 'title')
+		.attr('x', 20)
+		.attr('y', -20)
+		.text('U.S. Bacholor degree(or higher)  attainment by county.')
+
 }
 
 d3.queue()
