@@ -29,7 +29,7 @@ let svg = d3.select('.chart')
 	.attr('height', height)
 	.style('padding', '60 20 140 200')
 
-var tooltip = d3
+let tooltip = d3
 	.select('.chart')
 	.append('div')
 	.attr('id', 'tooltip')
@@ -49,11 +49,27 @@ function createMap(err, mapData, degreeData) {
 		.append('path')
 		.attr('d', path)
 		.attr('fill', (d) => {
-			for (let i = 0; i < degreeData.length; i++){
-				if (d.id == degreeData[i].fips)
-					return colorScale(degreeData[i].bachelorsOrHigher)
-			}
+			let educationObject = degreeData.filter((degreeObj) => {
+				let singleDegreeObj = degreeObj.fips == d.id
+
+				return singleDegreeObj
+			})
+
+			return  colorScale(educationObject[0].bachelorsOrHigher)
 		})
+		.attr('data-fips', (d) => {
+			return d.id
+		})
+		.attr('data-education', (d) => {
+			let educationObject = degreeData.filter((degreeObj) => {
+				let singleDegreeObj = degreeObj.fips == d.id
+
+				return singleDegreeObj
+			})
+
+			return educationObject[0].bachelorsOrHigher
+		})
+
 
 	svg.append('path')
 		.datum(topojson.mesh(mapData, mapData.objects.states, (a, b) => {
