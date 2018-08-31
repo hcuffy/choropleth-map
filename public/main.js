@@ -113,7 +113,7 @@ function createMap(err, mapData, degreeData) {
 		.attr('id', 'description')
 		.attr('x', 20)
 		.attr('y', -20)
-		.text('U.S. Bacholor degree(or higher) attainment by county.')
+		.text('U.S. cacholor\'s degree(or higher) attainment by county.')
 
 }
 

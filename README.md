@@ -1,6 +1,6 @@
 # Message Board
 
-Chroropeth map for bachelor degree attainment in the US from 2010-2014
+Chroropeth map for bachelor's degree attainment in the US from 2010-2014
 
 Live App: <https://exultant-taker.glitch.me/>
 
