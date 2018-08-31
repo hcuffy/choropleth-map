@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Chroropeth map for education Attainment in the US",
   "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "repository": "https://github.com/hcuffy/choropleth-map.git",
   "author": "Henry Cuffy",
   "license": "MIT",
