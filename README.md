@@ -2,7 +2,7 @@
 
 Chroropeth map for bachelor degree attainment in the US from 2010-2014
 
-Live App: Coming soon
+Live App: <https://exultant-taker.glitch.me/>
 
 ## Prerequisites for Local Installation.
 
@@ -17,7 +17,7 @@ You will need the following things properly installed on your computer.
 CLIENT
 
 -   `git clone <repository-url>` this repository
--   `cd scatterplot-graph`
+-   `cd choropleth-map`
 -   `yarn install`
 
 ## Running / Development
