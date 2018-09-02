@@ -33,9 +33,6 @@ let tooltip = d3
 	.append('div')
 	.attr('id', 'tooltip')
 
-
-
-
 function createMap(err, mapData, degreeData) {
 	if (err) {
 		throw err
@@ -113,7 +110,6 @@ function createMap(err, mapData, degreeData) {
 		.attr('x', 20)
 		.attr('y', -20)
 		.text('U.S. cacholor\'s degree(or higher) attainment by county.')
-
 }
 
 let legend =	svg
