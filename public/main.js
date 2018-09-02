@@ -1,7 +1,6 @@
 
 const width = 1000
 const height = 900
-const padding = 100
 let path = d3.geoPath()
 let degree = d3.map()
 
